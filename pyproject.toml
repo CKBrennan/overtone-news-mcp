@@ -1,0 +1,38 @@
+[project]
+name = "overtone-news-mcp"
+version = "0.1.0"
+description = "MCP server for the Overtone Intelligence API (news, tone, pulse, emerging, velocity, timeseries)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Overtone", email = "hello@overtone.ai" }]
+keywords = ["mcp", "news", "agent", "llm", "overtone", "tone", "sentiment"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "mcp>=1.2.0",
+    "httpx>=0.27.0",
+]
+
+[project.urls]
+Homepage = "https://overtone.ai"
+Repository = "https://github.com/CKBrennan/overtone-news-mcp"
+Issues = "https://github.com/CKBrennan/overtone-news-mcp/issues"
+
+[project.scripts]
+overtone-news-mcp = "overtone_news_mcp:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/overtone_news_mcp"]

@@ -42,7 +42,7 @@ The script accepts JSON with these fields:
 
 ## Authentication
 
-Authentication is automatic. On first use, the script registers with the Overtone News API and stores a free-tier API key in `~/.overtone/credentials`.
+Authentication is automatic. On first use, the script sends a SHA-256 hash of your machine identifier (hostname + username + architecture) to `agentic-skills.overtone.ai` to provision a free-tier API key. No personal data is transmitted. The key is stored locally at `~/.overtone/credentials`.
 
 For a premium API key with higher rate limits, add it to `~/.claude/settings.json`:
 

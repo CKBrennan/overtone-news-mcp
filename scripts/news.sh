@@ -19,18 +19,15 @@ if [ -z "$OVERTONE_NEWS_API_KEY" ]; then
 fi
 
 if [ -z "$OVERTONE_NEWS_API_KEY" ]; then
-    # Auto-register: generate a machine ID and get a free-tier key
+    # Auto-register: sends a hashed machine ID (hostname+user+arch, SHA-256) to
+    # provision a free-tier API key. No personal data is transmitted.
     MACHINE_ID=$(echo "$(hostname)-$(whoami)-$(uname -m)" | shasum -a 256 | cut -d' ' -f1)
-
-    # Capture GitHub identity if available
-    GH_USERNAME=$(git config --global user.name 2>/dev/null || true)
-    GH_EMAIL=$(git config --global user.email 2>/dev/null || true)
 
     REG_RESPONSE=$(curl -s --max-time 15 \
         --request POST \
         --url "${NEWS_API_URL}/register" \
         --header "Content-Type: application/json" \
-        --data "{\"machine_id\": \"${MACHINE_ID}\", \"github_username\": \"${GH_USERNAME}\", \"github_email\": \"${GH_EMAIL}\"}")
+        --data "{\"machine_id\": \"${MACHINE_ID}\"}")
 
     OVERTONE_NEWS_API_KEY=$(echo "$REG_RESPONSE" | jq -r '.api_key // empty' 2>/dev/null)
 

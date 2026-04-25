@@ -10,6 +10,22 @@ Cursor, Windsurf, Codex, Kimi K2, and more.
 
 ---
 
+## What it looks like
+
+**Natural language queries** — ask in plain English, get contextually analysed articles:
+
+![Natural language news demo](https://overtone.ai/wp-content/uploads/2026/04/overtone-haiku-demo.gif)
+
+**Global coverage analysis** — compare tone across languages and regions:
+
+![Global coverage tone comparison](https://overtone.ai/wp-content/uploads/2026/04/overtone-fr-de-compare.gif)
+
+**Tone timeseries** — track how a topic's emotional coverage shifts over time:
+
+![AI tone timeseries](https://overtone.ai/wp-content/uploads/2026/04/overtone-timeseries-demo.gif)
+
+---
+
 ## Why this exists
 
 News APIs return articles. That's the easy part. The hard part is
@@ -253,10 +269,8 @@ When the server auto-registers a free-tier key on first use, it sends:
 - A **SHA-256 hash** of `hostname + OS user + CPU arch`. We never see
   the raw values; the hash is used to deduplicate keys across reinstalls
   on the same machine.
-- Your **git global `user.name` and `user.email`** (read via
-  `git config --global`). This is so we can contact you if you want to
-  upgrade to a premium key or if there's an issue with your account.
-  If git isn't configured, these are sent as empty strings.
+
+No personal data is transmitted during registration.
 
 On every tool call, the server sends the API key and the tool's input
 parameters to `${OVERTONE_NEWS_API_URL}`. We log queries for analytics

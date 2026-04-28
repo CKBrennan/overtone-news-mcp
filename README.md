@@ -54,8 +54,8 @@ runs it without cluttering your global Python. Install `uv` once:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Then add one block to your MCP client config. The `uvx` command fetches
-the package from Git and runs it on demand.
+Then add one block to your MCP client config. `uvx` fetches the package
+from PyPI and runs it on demand — no install step needed.
 
 ### Claude Desktop
 
@@ -67,7 +67,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`
   "mcpServers": {
     "overtone-news": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/CKBrennan/overtone-news-mcp", "overtone-news-mcp"]
+      "args": ["overtone-news-mcp"]
     }
   }
 }
@@ -82,7 +82,7 @@ Edit `~/.config/claude-code/mcp.json`:
   "mcpServers": {
     "overtone-news": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/CKBrennan/overtone-news-mcp", "overtone-news-mcp"]
+      "args": ["overtone-news-mcp"]
     }
   }
 }
@@ -90,10 +90,10 @@ Edit `~/.config/claude-code/mcp.json`:
 
 ### Cursor / Windsurf
 
-Settings → MCP → Add server, using the same command and args:
+Settings → MCP → Add server:
 
 - **Command**: `uvx`
-- **Args**: `--from git+https://github.com/CKBrennan/overtone-news-mcp overtone-news-mcp`
+- **Args**: `overtone-news-mcp`
 
 ### Codex
 
@@ -103,15 +103,7 @@ Edit `~/.codex/config.toml`:
 [[mcp_servers]]
 name = "overtone-news"
 command = "uvx"
-args = ["--from", "git+https://github.com/CKBrennan/overtone-news-mcp", "overtone-news-mcp"]
-```
-
-### Once on PyPI
-
-Swap `--from git+…` for the package name:
-
-```json
-"args": ["overtone-news-mcp"]
+args = ["overtone-news-mcp"]
 ```
 
 ---

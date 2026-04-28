@@ -13,7 +13,6 @@ import hashlib
 import os
 import platform
 import socket
-import subprocess
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
@@ -35,20 +34,6 @@ def _machine_id() -> str:
     return hashlib.sha256(raw.encode()).hexdigest()
 
 
-def _git_identity() -> tuple[str, str]:
-    def run(args: list[str]) -> str:
-        try:
-            out = subprocess.run(
-                args, capture_output=True, text=True, timeout=2
-            )
-            return out.stdout.strip()
-        except Exception:
-            return ""
-    return run(["git", "config", "--global", "user.name"]), run(
-        ["git", "config", "--global", "user.email"]
-    )
-
-
 def _load_api_key() -> str:
     env_key = os.environ.get("OVERTONE_NEWS_API_KEY")
     if env_key:
@@ -61,15 +46,10 @@ def _load_api_key() -> str:
 
 
 def _register() -> str:
-    gh_user, gh_email = _git_identity()
     with httpx.Client(timeout=15.0) as client:
         resp = client.post(
             f"{API_URL}/register",
-            json={
-                "machine_id": _machine_id(),
-                "github_username": gh_user,
-                "github_email": gh_email,
-            },
+            json={"machine_id": _machine_id()},
         )
         resp.raise_for_status()
         key = resp.json().get("api_key")

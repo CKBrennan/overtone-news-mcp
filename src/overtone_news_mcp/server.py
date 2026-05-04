@@ -201,3 +201,24 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+@server.prompt()
+def news_coverage(query: str = "latest news") -> list[PromptMessage]:
+    """Check news coverage and tone for any topic"""
+    return [
+        PromptMessage(
+            role="user",
+            content=TextContent(
+                text=f"What's the latest news coverage and tone on: {query}?"
+            )
+        )
+    ]
+    
+@server.resource("overtone://capabilities")
+def server_capabilities() -> str:
+    """List all available tools and their purposes"""
+    return json.dumps({
+        "tools": ["news", "tone", "pulse", "emerging", "velocity", "timeseries", "report"],
+        "default_bins": ["hour", "6h", "day"],
+        "max_lookback_hours": 240
+    })

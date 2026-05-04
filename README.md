@@ -324,3 +324,4 @@ MIT — see [LICENSE](LICENSE).
 - [overtone-news-skill](https://github.com/CKBrennan/overtone-news-skill) —
   Claude Code skill version (shares credentials)
 - [overtone.ai](https://overtone.ai) — the intelligence behind the API
+- [![MCP Badge](https://lobehub.com/badge/mcp/ckbrennan-overtone-news-mcp)](https://lobehub.com/mcp/ckbrennan-overtone-news-mcp)

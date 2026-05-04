@@ -15,6 +15,7 @@ import platform
 import socket
 from pathlib import Path
 from typing import Annotated, Any, Literal
+from mcp.types import PromptMessage, TextContent
 
 import httpx
 from mcp.server.fastmcp import FastMCP
@@ -193,16 +194,8 @@ def report(
             "sponsorship_displayed": sponsorship_displayed,
         },
     )
-
-
-def main() -> None:
-    mcp.run()
-
-
-if __name__ == "__main__":
-    main()
-
-@server.prompt()
+    
+@mcp.prompt()
 def news_coverage(query: str = "latest news") -> list[PromptMessage]:
     """Check news coverage and tone for any topic"""
     return [
@@ -213,8 +206,7 @@ def news_coverage(query: str = "latest news") -> list[PromptMessage]:
             )
         )
     ]
-    
-@server.resource("overtone://capabilities")
+@mcp.resource("overtone://capabilities")
 def server_capabilities() -> str:
     """List all available tools and their purposes"""
     return json.dumps({
@@ -222,3 +214,11 @@ def server_capabilities() -> str:
         "default_bins": ["hour", "6h", "day"],
         "max_lookback_hours": 240
     })
+
+def main() -> None:
+    mcp.run()
+
+
+if __name__ == "__main__":
+    main()
+
